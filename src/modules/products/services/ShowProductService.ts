@@ -5,7 +5,7 @@ import { ProductRepository } from "../typeorm/repositories/ProductRepository";
 
 interface IRequest {
     id: string;
-}
+} 
 
 class ShowProductService {
 
