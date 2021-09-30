@@ -1,31 +1,35 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateProducts1626970703727 implements MigrationInterface {
+export class CreateUsers1630157512584 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: 'products',
+            name: 'users',
             columns: [
                 {
-                    name: "id",
+                    name: 'id',
                     type: 'uuid',
                     isPrimary: true,
-                    generationStrategy: 'increment',
-                    default: 'uuid_generate_v4()',
+                    generationStrategy: 'uuid',
+                    default: 'uuid_generate_v4()'
                 },
                 {
-                    name: "name",
+                    name: 'name',
+                    type: 'varchar'
+                },
+                {
+                    name: 'email',
                     type: 'varchar',
+                    isUnique: true
                 },
                 {
-                    name: "price",
-                    type: 'decimal',
-                    precision: 10,
-                    scale: 2
+                    name: 'password',
+                    type: 'varchar'
                 },
                 {
-                    name: "quantity",
-                    type: 'int',    
+                    name: 'avatar',
+                    type: 'varchar',
+                    isNullable: true
                 },
                 {
                     name: "created_at",
@@ -36,13 +40,13 @@ export class CreateProducts1626970703727 implements MigrationInterface {
                     name: "update_at",
                     type: 'timestamp with time zone',
                     default: 'now()'
-                },
+                }
             ]
-        }));
+        }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('products');
+        await queryRunner.dropTable('users');
     }
 
 }
